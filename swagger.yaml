@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  title: MirAI Comercial Dashboard API
+  version: 1.0.0
+  description: API para fornecer dados ao Dashboard Comercial da MirAI.
+servers:
+  - url: /
+paths:
+  /api/comercial-data:
+    get:
+      summary: Retorna todos os dados comerciais.
+      description: Busca todos os registros da tabela `comercial_data_taxlab` do Supabase.
+      responses:
+        '200':
+          description: Uma lista de dados comerciais.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data_registro:
+                      type: string
+                      format: date
+                      description: Data do registro.
+                    nome_responsavel:
+                      type: string
+                      description: Nome do responsável.
+                    leads_trabalhados:
+                      type: integer
+                      description: Número de leads trabalhados.
+                    contatos_realizados:
+                      type: integer
+                      description: Número de contatos realizados.
+                    reunioes_agendadas:
+                      type: integer
+                      description: Número de reuniões agendadas.
+                    propostas_enviadas:
+                      type: integer
+                      description: Número de propostas enviadas.
+                    vendas_fechadas:
+                      type: integer
+                      description: Número de vendas fechadas.
+        '500':
+          description: Erro interno do servidor.
+  /health:
+    get:
+      summary: Verifica a saúde do servidor.
+      responses:
+        '200':
+          description: Servidor está rodando.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Backend is running
